@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2 import sql
 import argparse
 import sys
 
@@ -14,13 +15,12 @@ def insert_message(message_text, table_name):
             sslmode="require"
         )
 
-
         cur = conn.cursor()
 
-        query = f"""
-            INSERT INTO {table_name} (date, message)
-            VALUES (NOW(), %s)
-        """
+        query = sql.SQL("""
+            INSERT INTO {} (message)
+            VALUES (%s)
+        """).format(sql.Identifier(table_name))
 
         cur.execute(query, (message_text,))
         conn.commit()
@@ -34,12 +34,15 @@ def insert_message(message_text, table_name):
     finally:
         if 'cur' in locals():
             cur.close()
+
         if 'conn' in locals():
             conn.close()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Insert message into Postgres table")
+    parser = argparse.ArgumentParser(
+        description="Insert a message into a PostgreSQL table"
+    )
 
     parser.add_argument(
         "--message_text",
@@ -55,7 +58,10 @@ def main():
 
     args = parser.parse_args()
 
-    insert_message(args.message_text, args.table_name)
+    insert_message(
+        message_text=args.message_text,
+        table_name=args.table_name
+    )
 
 
 if __name__ == "__main__":
