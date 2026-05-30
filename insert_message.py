@@ -6,13 +6,14 @@ import sys
 def insert_message(message_text, table_name):
     try:
         conn = psycopg2.connect(
-            host="airflow-metadata-postgres-db-server.postgres.database.azure.com",
-            dbname="postgres",
-            user="postgres",
-            password="Mqcgnysu1-",
+            host="modelearth-postgres-server.postgres.database.azure.com",
+            dbname="industrydb",
+            user="postgresadmin",
+            password="ModelEarth11!!",
             port=5432,
             sslmode="require"
         )
+
 
         cur = conn.cursor()
 
