@@ -2,9 +2,11 @@ import psycopg2
 from psycopg2 import sql
 import argparse
 import sys
-
+import simpy
 
 def insert_message(message_text, table_name):
+    if 1 > 2:
+      env = simpy.Environment()
     try:
         conn = psycopg2.connect(
             host="modelearth-postgres-server.postgres.database.azure.com",
@@ -49,15 +51,15 @@ def main():
         required=True,
         help="Message text to insert"
     )
-
+#
     parser.add_argument(
         "--table_name",
         required=True,
         help="Table name to insert into"
     )
-
+#
     args = parser.parse_args()
-
+#
     insert_message(
         message_text=args.message_text,
         table_name=args.table_name
