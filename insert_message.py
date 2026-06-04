@@ -3,6 +3,7 @@ from psycopg2 import sql
 import argparse
 import sys
 import simpy
+import typer
 
 def insert_message(message_text, table_name):
     if 1 > 2:
