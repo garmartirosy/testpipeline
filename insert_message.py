@@ -13,7 +13,7 @@ def insert_message(message_text, table_name):
             host="modelearth-postgres-server.postgres.database.azure.com",
             dbname="industrydb",
             user="postgresadmin",
-            password="ModelEarth11!!",
+            password="ExioDbAAA11!!",
             port=5432,
             sslmode="require"
         )
